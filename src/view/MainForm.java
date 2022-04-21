@@ -1,7 +1,16 @@
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.SpringLayout;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 
 
 public class MainForm extends javax.swing.JFrame {
@@ -129,6 +138,11 @@ public class MainForm extends javax.swing.JFrame {
         jRadioButton2.setText("lapok összértéke");
 
         jButton3.setText("Mentés");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Kilépés");
 
@@ -170,6 +184,11 @@ public class MainForm extends javax.swing.JFrame {
         jMenu1.setText("File");
 
         jMenuItem1.setText("Mentés");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Kilépés");
@@ -233,6 +252,14 @@ public class MainForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        mentes();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        mentes();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -262,6 +289,45 @@ public class MainForm extends javax.swing.JFrame {
                 new MainForm().setVisible(true);
             }
         });
+    }
+    /*
+    private void mentestuti() {
+        
+        Icon icon = new ImageIcon(this.getClass().getResource("res/ikon.jpg"));
+            int gomb = JOptionPane.showConfirmDialog(rootPane, "Fájl neve:"+da+"\nElérése:"+ad, "Kérdés", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icon);
+                if (gomb == JOptionPane.OK_OPTION) {
+                    System.exit(0);     
+        }
+    }
+    */
+    public void mentes() {
+        
+        JFileChooser jfc = new JFileChooser("C:\\Users\\Erik\\Documents\\SzaboAE_BlackJack");
+        jfc.setDialogTitle("Megnyitás");
+        
+        jfc.setAcceptAllFileFilterUsed(true);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("*.jpg, *.gif", "jpg, gif");
+        FileNameExtensionFilter filter1 = new FileNameExtensionFilter("*.txt", "txt");
+	jfc.addChoosableFileFilter(filter);
+        jfc.addChoosableFileFilter(filter1);
+
+        int returnValue = jfc.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            
+            //mentestuti();
+            
+            String ad = (jfc.getSelectedFile().getPath());
+            String da = (jfc.getSelectedFile().getName());
+            
+            Icon icon = new ImageIcon(this.getClass().getResource("res/ikon.jpg"));
+            
+            int gomb = JOptionPane.showConfirmDialog(rootPane, "Fájl neve:"+da+"\nElérése:"+ad, "Kérdés", 
+            JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icon);
+            if (gomb == JOptionPane.OK_OPTION) {
+                System.exit(0);     
+            }
+        }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
