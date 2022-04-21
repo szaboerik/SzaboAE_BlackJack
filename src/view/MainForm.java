@@ -56,6 +56,11 @@ public class MainForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BlackJack");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Ellenfél"));
 
@@ -136,6 +141,11 @@ public class MainForm extends javax.swing.JFrame {
         buttonGroup2.add(jRadioButton2);
         jRadioButton2.setSelected(true);
         jRadioButton2.setText("lapok összértéke");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Mentés");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -192,6 +202,11 @@ public class MainForm extends javax.swing.JFrame {
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Kilépés");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
@@ -260,6 +275,18 @@ public class MainForm extends javax.swing.JFrame {
         mentes();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        kilepes();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        kilepes();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -300,7 +327,7 @@ public class MainForm extends javax.swing.JFrame {
         }
     }
     */
-    public void mentes() {
+    private void mentes() {
         
         JFileChooser jfc = new JFileChooser("C:\\Users\\Erik\\Documents\\SzaboAE_BlackJack");
         jfc.setDialogTitle("Megnyitás");
@@ -316,18 +343,27 @@ public class MainForm extends javax.swing.JFrame {
             
             //mentestuti();
             
-            String ad = (jfc.getSelectedFile().getPath());
-            String da = (jfc.getSelectedFile().getName());
+            String eleresiUt = (jfc.getSelectedFile().getPath());
+            String fajlNeve = (jfc.getSelectedFile().getName());
             
             Icon icon = new ImageIcon(this.getClass().getResource("res/ikon.jpg"));
             
-            int gomb = JOptionPane.showConfirmDialog(rootPane, "Fájl neve:"+da+"\nElérése:"+ad, "Kérdés", 
+            int gomb = JOptionPane.showConfirmDialog(rootPane, "Fájl neve:"+fajlNeve+"\nElérése:"+eleresiUt, "Kérdés", 
             JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icon);
             if (gomb == JOptionPane.OK_OPTION) {
-                System.exit(0);     
+                int OK_OPTION = JOptionPane.OK_OPTION;     
+            }if (gomb == JOptionPane.CANCEL_OPTION) {
+                int CANCEL_OPTION = JOptionPane.CANCEL_OPTION;     
             }
         }
         
+    }
+    private void kilepes() {
+        Icon icon = new ImageIcon(this.getClass().getResource("res/ikon.jpg"));
+        int gomb = JOptionPane.showConfirmDialog(rootPane, "Biztos kilép?", "Kérdés", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, icon);
+        if (gomb == JOptionPane.OK_OPTION) {
+            System.exit(0);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
